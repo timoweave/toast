@@ -7,48 +7,53 @@ Make `useToast(...)` hook to use with toast components `<Toast .../>`, toast pro
 # coding
 
 1. Add the ToastProvider and use the 
+   ```
+   // main.tsx
+   ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+     <React.StrictMode>
+       <ToastProvider position="bottom-right"> {/* <--- here */}
+         <App />
+       </ToastProvider>
+     </React.StrictMode>,
+   );
+   ```
 1. Add the ToastInput Example (Provider....)
+   ```
+   // App.tsx
+   import './App.css';
+   import { ToastInput, ToastInputProvider } from './ToastInput';
+   
+   export const App = (): JSX.Element => {
+     return (
+       <ToastInputProvider>                 {/* <--- here */}
+         <ToastInput />                     {/* <--- here */}
+       </ToastInputProvider>
+     );
+   };
+   ```
 1. call addToast to add toast
-
-```
-// 1. main.tsx
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <ToastProvider position="bottom-right">
-      <App />
-    </ToastProvider>
-  </React.StrictMode>,
-);
-
-
-// 2. App.tsx (using ToastInputProvider example)
-import './App.css';
-import { ToastInput, ToastInputProvider } from './ToastInput';
-
-export const App = (): JSX.Element => {
-  return (
-    <ToastInputProvider>
-      <ToastInput />
-    </ToastInputProvider>
-  );
-};
-
-// 3. add Toast (using ToastInputProvider example)
-export const ToastInput = (): JSX.Element => {
-  const toastContext = useContext(ToastContext);
-  const { addToast } = toastContext;
-    
-  return (
-    <div>
-        ...
-        <button
-            onClick={() => {
-              addToast({ id: uuidv4(), title, status, expire });
-            }}
-          >
-            toast
-        </button>
-    </div>
-  );
-}
-```
+   ```
+   // ToastInput.tsx
+   export const ToastInput = (): JSX.Element => {
+     const toastContext = useContext(ToastContext);
+     const { addToast } = toastContext;
+       
+     return (
+       <div>
+           ...
+           <button
+               onClick={() => {
+                    addToast({             // <--- here
+                        id: uuidv4(), 
+                        title, 
+                        status, 
+                         expire,
+                    });
+               }}
+             >
+               toast
+           </button>
+       </div>
+     );
+   }
+   ```
