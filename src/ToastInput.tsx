@@ -1,16 +1,10 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable @typescript-eslint/no-empty-function */
-import {
-  createContext,
-  useContext,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
-import './App.css';
-import { v4 as uuidv4 } from 'uuid';
-import closeIcon from './assets/cross-svgrepo-com.svg';
-import { TOAST_STATUS_LIST, ToastContext, ToastData, ToastStatus, getStatusIcon } from './Toast';
+import { createContext, useContext, useCallback, useState } from "react";
+import React from "react";
+import "./App.css";
+import { v4 as uuidv4 } from "uuid";
+import { TOAST_STATUS_LIST, ToastContext, ToastStatus } from "./Toast";
 
 export type UseToastInput = {
   title: string | undefined;
